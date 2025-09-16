@@ -64,13 +64,16 @@ func shiftBitsOneRight(input []byte) []byte {
 }
 
 func TestCoding(t *testing.T) {
-	require.Nil(t, FromDataCoding(12))
 	require.Equal(t, GSM7BIT, FromDataCoding(0))
 	require.Equal(t, ASCII, FromDataCoding(1))
 	require.Equal(t, UCS2, FromDataCoding(8))
 	require.Equal(t, LATIN1, FromDataCoding(3))
 	require.Equal(t, CYRILLIC, FromDataCoding(6))
 	require.Equal(t, HEBREW, FromDataCoding(7))
+	// Custom coding
+	customCoding := FromDataCoding(12)
+	require.NotNil(t, customCoding)
+	require.Equal(t, byte(12), customCoding.DataCoding())
 }
 
 func TestGSM7Bit(t *testing.T) {
